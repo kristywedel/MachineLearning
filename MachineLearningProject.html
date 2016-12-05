@@ -154,7 +154,7 @@ dat$classe &lt;- pml.training$classe
 pml.training &lt;- dat
 #remove NAs
 pml.training &lt;- na.omit(pml.training)</code></pre>
-<p>The random forest model ranks the importance of fields in the model. It can be used to identify some of the more useful predictors.</p>
+<p>The random forest model ranks the importance of fields in the model. It can identify some of the more useful predictors.</p>
 <pre class="r"><code>#remove lower importance fields
 
 fit&lt;-randomForest(classe~., data=pml.training, ntree=500, keep.forest=FALSE, importance = TRUE)
@@ -211,7 +211,7 @@ pml.training &lt;- training</code></pre>
 </div>
 <div id="creating-the-model-and-testing-on-the-validation-set" class="section level2">
 <h2>Creating the model and testing on the validation set</h2>
-<p>Create the random forest model using the best number of trees</p>
+<p>The random forest model is created using the number of trees that gives the highest accuracy. It is then tested on the validation data. The accuracy on the validation set is 0.9932708 The out of sample error rate on the validation set is 1-0.9932708 = 0.006729201</p>
 <pre class="r"><code>fit&lt;-randomForest(classe~., data=pml.training, ntree=1500, importance = TRUE)
 print(fit)</code></pre>
 <pre><code>## 
@@ -230,9 +230,13 @@ print(fit)</code></pre>
 ## D    0    1   21 2388    2 0.009950249
 ## E    0    2    5    7 2692 0.005173688</code></pre>
 <pre class="r"><code>pred_val_test&lt;-predict(fit, pml.validation)
-confusionMatrix(pred_val_test, pml.validation$classe)$overall[1]</code></pre>
+val &lt;- confusionMatrix(pred_val_test, pml.validation$classe)$overall[1]
+val</code></pre>
 <pre><code>##  Accuracy 
 ## 0.9916395</code></pre>
+<pre class="r"><code>oose = 1-as.numeric(val[&quot;Accuracy&quot;])
+oose</code></pre>
+<pre><code>## [1] 0.008360522</code></pre>
 </div>
 <div id="testing-the-model-with-the-test-set" class="section level2">
 <h2>Testing the model with the test set</h2>

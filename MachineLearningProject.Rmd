@@ -55,7 +55,7 @@ pml.training <- dat
 pml.training <- na.omit(pml.training)
 ```
 
-The random forest model ranks the importance of fields in the model. It can be used to identify some of the more useful predictors.
+The random forest model ranks the importance of fields in the model. It can identify some of the more useful predictors.
 
 ```{r}
 #remove lower importance fields
@@ -104,13 +104,16 @@ pml.training <- training
 ```
 
 ## Creating the model and testing on the validation set
-Create the random forest model using the best number of trees 
+The random forest model is created using the number of trees that gives the highest accuracy. It is then tested on the validation data. The accuracy on the validation set is 0.9932708 The out of sample error rate on the validation set is 1-0.9932708 = 0.006729201
 
 ```{r}
 fit<-randomForest(classe~., data=pml.training, ntree=1500, importance = TRUE)
 print(fit)
 pred_val_test<-predict(fit, pml.validation)
-confusionMatrix(pred_val_test, pml.validation$classe)$overall[1]
+val <- confusionMatrix(pred_val_test, pml.validation$classe)$overall[1]
+val
+oose = 1-as.numeric(val["Accuracy"])
+oose
 ```
 
 ## Testing the model with the test set
