@@ -21,8 +21,8 @@ require(caretEnsemble)
 require(randomForest)
 ```
 ```{r}
-pml.training <- read.csv("C:/Users/kmw014/Desktop/Machine Learning Project/pml-training.csv")
-pml.testing <- read.csv("C:/Users/kmw014/Desktop/Machine Learning Project/pml-testing.csv")
+pml.training <- read.csv("pml-training.csv")
+pml.testing <- read.csv("pml-testing.csv")
 set.seed(1234)
 #str(pml.training)
 ```
