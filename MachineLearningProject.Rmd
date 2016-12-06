@@ -72,6 +72,8 @@ pml.training$classe <- dat$classe
 Through a comparison of the accuracy and kappas of each model, the best number of trees can be selected.
 
 ```{r}
+#timing
+ptm <- proc.time()
 # Manual Search
 x <- pml.training[,1:15]
 y <- pml.training[,16]
@@ -89,6 +91,8 @@ for (ntree in c(500, 1500)) {
 results <- resamples(modellist)
 summary(results)
 dotplot(results)
+#stop timing
+proc.time() - ptm
 
 ```
 
