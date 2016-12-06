@@ -15,10 +15,10 @@ Six young health participants were asked to perform one set of 10 repetitions of
 
 ## Cleaning the data
 ```{r load_packages, include=FALSE}
-library(mlbench)
-library(caret)
-library(caretEnsemble)
-library(randomForest)
+require(mlbench)
+require(caret)
+require(caretEnsemble)
+require(randomForest)
 ```
 ```{r}
 pml.training <- read.csv("C:/Users/kmw014/Desktop/Machine Learning Project/pml-training.csv")
